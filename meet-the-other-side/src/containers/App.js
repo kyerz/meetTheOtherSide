@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import '../style/app.css'
+
 import CreateChars from '../components/Create-chars.js'
-import Button from '../components/Select-side.js'
+import SelectSide from '../components/Select-side.js'
 
 const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
 
@@ -24,9 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <Button.Red action={this.changeSide} text="Change Side" />
-        </header>
+        <SelectSide action={this.changeSide} text="Change Side" />
         <CreateChars characters={this.state.characters} userSide={this.state.userSide} />
       </div>
     )

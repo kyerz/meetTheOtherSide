@@ -1,0 +1,49 @@
+.select-side-wrapper {
+    height: 100vh;
+    background-color: #000;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex .image-wrapper {
+    width: 50%;
+}
+
+.image-choice {
+    object-fit: cover;
+    object-position : top;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    position: relative;
+    cursor : pointer;
+}
+
+.light-side{
+    background : linear-gradient(to top, rgba(0, 80, 161, 0.2), #000000);
+}
+.dark-side{
+    background : linear-gradient(to top, rgba(169, 34, 28, 0.2), #000000);
+}
+.light-side:hover{
+    background : linear-gradient(to top, rgba(0, 80, 161, 1), #000000);
+}
+.dark-side:hover{
+    background : linear-gradient(to top, rgba(169, 34, 28, 1), #000000);
+}
+.charList {
+    display: none;
+}
+
+.home-title {
+    font-size: 45px;
+    position: absolute;
+    top: 45%;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    color: #fcc200;
+    font-family: 'starjout';
+}
