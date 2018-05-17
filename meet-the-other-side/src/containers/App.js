@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import './../style/characters.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 
@@ -18,7 +18,11 @@ class App extends Component {
     super()
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
       .then(result => result.json())
-      .then(characters => this.setState({ characters }))
+      
+      .then(characters =>{
+        this.setState({ characters })
+       console.log(characters)
+      })
   }
 
   render() {
