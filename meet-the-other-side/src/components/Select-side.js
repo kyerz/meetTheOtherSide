@@ -7,16 +7,15 @@ const SelectSide = ({ action, text }) => {
     return(
         <div className="select-side-wrapper flex">
             <h1 className="home-title">Choose your side</h1>
-            <div className="image-wrapper light-side">
+            <div className="image-wrapper light-side" onClick={action}>
                 <img className="image-choice" src={bgLight} alt={bgLight} />
             </div>
-            <div className="image-wrapper dark-side">
+            <div className="image-wrapper dark-side" onClick={action}>
                 <img className="image-choice" src={bgDark} alt={bgDark} />
             </div>
         </div>
     )
 }
-    {/* <button onClick={action}> {text} </button> */}
 
 
 export default SelectSide
