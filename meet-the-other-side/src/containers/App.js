@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './../style/characters.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
+import NavBar from '../components/navbar-container.js'
 
 const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
 
@@ -28,6 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <NavBar />
         <SelectSide action={this.changeSide} text="Change Side" />
         <CreateChars characters={this.state.characters} userSide={this.state.userSide} />
       </div>
