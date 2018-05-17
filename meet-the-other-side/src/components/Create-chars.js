@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../style/characters.css'
 
 const Pic = ({ id, image, name, born, homeworld, diedLocation }) => {
 
@@ -35,5 +35,8 @@ const CreateChars = ({ characters, userSide }) =>
       .filter(sideFilters[userSide])
       .map(Pic)}
   </div>
+
+ 
+
 
 export default CreateChars
