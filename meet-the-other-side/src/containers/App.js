@@ -18,7 +18,11 @@ class App extends Component {
     super()
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
       .then(result => result.json())
-      .then(characters => this.setState({ characters }))
+      
+      .then(characters =>{
+        this.setState({ characters })
+       console.log(characters)
+      })
   }
 
   render() {

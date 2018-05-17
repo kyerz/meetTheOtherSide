@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,700');
+
+html,body {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background : url(../img/milky-way-BG.jpg)
+}
+
+html, body {
+    margin: 1rem;
+  }
+
+.imgContainer {
+    width: 20rem;
+    height: 30rem;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 1rem;
+    border: 0.4rem inset #fdf253;
+    text-decoration: none;
+    transition: background-size 10s cubic-bezier(0, 0.76, 0, 1.15); 
+}
+
+.charList {
+    display:flex;
+    flex-wrap:wrap;
+    background: transparent;
+}
+
+.character-infos {
+    background: black;
+    opacity: 0.65;
+    color: white;
+    padding: 0.2rem;
+    padding-left: 0.4rem;
+    font-weight: 100;
+  }
+  
+  .character-infos img {
+    width: 1rem;
+    fill: white;
+  }
+  
+  .character-infos a {
+    color: #fdf253;
+    text-decoration: none;
+  }
+  
+  .character-name {
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+  
