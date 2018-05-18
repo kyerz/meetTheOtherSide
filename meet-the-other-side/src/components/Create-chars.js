@@ -30,7 +30,7 @@ const sideFilters = {
 }
 
 const CreateChars = ({ characters, userSide, action }) => 
-  <div className="charList">
+  <div className="charList" id="charList-design">
     {characters
       .filter(sideFilters[userSide])
       .map(c => Pic({ action, ...c }))}
