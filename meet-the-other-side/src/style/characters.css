@@ -10,9 +10,11 @@ html,body {
 }
 
 html, body {
-    margin: 1rem;
-  }
-
+  margin: 1rem;
+}
+.ui.grid{
+  margin : 0;
+}
 .imgContainer {
     width: 20rem;
     height: 30rem;
@@ -31,32 +33,43 @@ html, body {
 }
 
 .charList {
-    display:flex;
-    flex-wrap:wrap;
-    background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  background: transparent;
 }
 
-.character-infos {
-    background: black;
-    opacity: 0.65;
-    color: white;
-    padding: 0.2rem;
-    padding-left: 0.4rem;
-    font-weight: 100;
-  }
-  
-  .character-infos img {
-    width: 1rem;
-    fill: white;
-  }
-  
-  .character-infos a {
-    color: #fdf253;
-    text-decoration: none;
-  }
-  
-  .character-name {
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-  
+.character-wrapper {
+  background: rgba(0, 0, 0, 0.5);
+  margin : 0;
+  color: white;
+  padding: 0.2rem;
+  padding-left: 0.4rem;
+  font-weight: 100;
+}
+
+.character-wrapper .image {
+  width: 300px;
+  height: 300px;
+  background-repeat: no-repeat;
+  margin-top : 1rem;
+}
+
+.character-wrapper a {
+  color: #fdf253;
+  text-decoration: none;
+}
+
+.character-wrapper .heart {
+  color: #fff;
+  font-size: 2rem;
+
+}
+
+.character-wrapper .heart.active {
+  color: red;
+}
+
+.character-name {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
