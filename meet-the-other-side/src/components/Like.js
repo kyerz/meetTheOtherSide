@@ -4,11 +4,12 @@ class Liker extends Component {
     state = {
         active: false
     }
-
+    
     handleClick = event => {
         if (this.state.active === false) {
             this.setState({ active: true })
-            this.props.action()
+            console.log("props",this.props.characters)
+            this.props.action(this.props.characters)
         } else {
             this.setState({ active: false })
         }

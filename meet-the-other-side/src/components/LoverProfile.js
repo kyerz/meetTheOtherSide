@@ -7,7 +7,7 @@ const LoverProfile =({action,sendMessage,id,image,name,born,homeworld, height, m
         <div className="character-wrapper ui grid" key={id}>
             <i className="arrow circle left icon" onClick={() => action()}></i>
             <div className="image column four wide" style={{ backgroundImage: `url(${image})` }}>
-                <Liker action={sendMessage}/>
+                <Liker action={sendMessage} characters ={{id, species, name}} />
             </div>
                 <div className="character-infos column eight wide">
 
