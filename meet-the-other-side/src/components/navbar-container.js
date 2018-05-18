@@ -12,20 +12,35 @@ return ( <div className="msgContent"> {msgList} </div> )
 
 
 const NavBar = (props) => {
-  return (
-    <div className='wrapper-navbar'>
-      
-      <Logo />
-      <div  className="myprofile" onClick={() => props.action()} style = {{backgroundImage: `url(${props.myCharacter.image})`}}></div>
-      <div>{props.myCharacter.name}</div>
-      <i className="mail outline big icon" onClick={props.onOpenModal}></i>
-        <Modal open={props.open} onClose={props.onCloseModal} center>
-          <h2>Your messages</h2>
-          <CreateMsg message = {props.message} />
+  if (props.message.length === 0) {
+    return (
+      <div className='wrapper-navbar'>
+        <Logo />
+        <div  className="myprofile" style = {{backgroundImage: `url(${props.myCharacter.image})`}}></div>
+        <div>{props.myCharacter.name}</div>
+        <i className="mail outline big icon" onClick={props.onOpenModal}></i>
+          <Modal open={props.open} onClose={props.onCloseModal} center>
+            <h2>Your messages</h2>
+            <CreateMsg message = {props.message} />
+  
+          </Modal> 
+        <a className='logout'onClick={()=>window.location.reload(true)}>Logout</a>
+      </div>
+    )}
 
-        </Modal> 
-      <a className='logout'onClick={()=>window.location.reload(true)}>Logout</a>
-    </div>
+    return (
+      <div className='wrapper-navbar'>
+        <Logo />
+        <div  className="myprofile" style = {{backgroundImage: `url(${props.myCharacter.image})`}}></div>
+        <div>{props.myCharacter.name}</div>
+        <i className="mail outline big icon active" onClick={props.onOpenModal}></i>
+          <Modal open={props.open} onClose={props.onCloseModal} center>
+            <h2>Your messages</h2>
+            <CreateMsg message = {props.message} />
+  
+          </Modal> 
+        <a className='logout'onClick={()=>window.location.reload(true)}>Logout</a>
+      </div>
   )
 }
 
