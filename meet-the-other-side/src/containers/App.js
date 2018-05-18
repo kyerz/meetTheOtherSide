@@ -9,6 +9,23 @@ import LoverProfile from '../components/LoverProfile.js'
 
 const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
 
+const isLightSide = (characters) =>
+   (characters.affiliations.includes("Galactic Republic")
+     || characters.affiliations.includes("Resistance")
+     || characters.affiliations.includes("Jedi Order")
+     || characters.affiliations.includes("Alliance to Restore the Republic")
+     || characters.affiliations.includes("Lars family")
+     || characters.affiliations.length === 0)
+   && !characters.affiliations.includes("Hutt Clan")
+   && !characters.affiliations.includes("Sith")
+  "Hutt Clan" 
+ const isDarkSide = character => !isLightSide(character)
+ 
+ const sideFilters = {
+   light: isLightSide,
+   dark: isDarkSide
+ }
+
 class App extends Component {
   state = {
     characters: [],
@@ -21,7 +38,19 @@ class App extends Component {
   getAlternateSide = () => getAlternateSide(this.state.userSide)
   changeSide = () => this.setState({ userSide: this.getAlternateSide() })
   
-   getRandomCharacter =characters=>characters[Math.floor(Math.random()*characters.length)]
+   getRandomCharacter =characters=> {
+    console.log("getsomecharandom", characters)
+    console.log("user side", this.state.userSide )
+    const charactersLight = characters.filter(isLightSide)
+    const charactersDark = characters.filter(isDarkSide)
+    console.log("getDark", charactersDark)
+    console.log("getLight", charactersLight)
+   if (this.state.userSide = 'dark') {
+     return charactersDark[Math.floor(Math.random()*charactersDark.length)]
+   }
+   return charactersLight[Math.floor(Math.random()*charactersLight.length)]
+ }
+     
     
   
   changeMyCharacter = () => this.setState({ myCharacter: this.getRandomCharacter(this.state.characters) })
