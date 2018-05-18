@@ -70,7 +70,7 @@ class App extends Component {
       }
       return (
         <div className="App">
-        <NavBar />
+        <NavBar myCharacter={this.state.myCharacter} />
         <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )
