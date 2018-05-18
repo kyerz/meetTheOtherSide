@@ -64,7 +64,7 @@ class App extends Component {
       message = "Heiiiiiiinnnnnnnnnnnggggggggggggggggggggggggggg"
     }
   else if (characterSelect.id === 14 ) {
-      message = "Han solo"
+      message = "Ca va peut-être pas sentir très bon... Mais au moins ca va te tenir chaud. "
     }
  else if (characterSelect.species === "droid" ) {
       message = "Je cherche quelqu'un pour lubrifier mes rouages"
