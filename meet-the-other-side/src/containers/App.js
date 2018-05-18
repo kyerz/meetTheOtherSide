@@ -34,7 +34,7 @@ class App extends Component {
     userSide: 'light',
     myCharacter:{} ,
     page : 1,
-    profilSelected : null
+    profileSelected : null
   }
   charactersLight = ()=>this.state.characters.filter(isLightSide)
   charactersDark =()=> this.state.characters.filter(isDarkSide)
@@ -60,6 +60,7 @@ class App extends Component {
    return this.changeMyCharacter(this.charactersDark())
   }
   selectProfile = profileSelected => this.setState({profileSelected})
+  
 
   constructor() {
     super()
