@@ -5,6 +5,7 @@
 
 .flex {
     display: flex;
+    justify-content: center;
 }
 
 .flex .image-wrapper {
@@ -65,7 +66,6 @@
     position: absolute;
     top: 45%;
     text-align: center;
-    width: 100%;
     z-index: 1;
     color: #fcc200;
     font-family: 'starjedi';
