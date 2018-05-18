@@ -179,7 +179,9 @@ class App extends Component {
         <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message} />
           <h2 className="titleFilter">Love Stars Filter</h2>
           <div className="loveFilter">
-          {this.MakeCheck()}
+            <div className="wrapper-checkbox">
+              {this.MakeCheck()}
+            </div>
           </div>
           <CreateChars action={this.selectProfile} characters={this.state.panier} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
         </div>

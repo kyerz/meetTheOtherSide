@@ -2,17 +2,25 @@
   display: flex;
     justify-content: center;
     align-items: center;  
-  border: 3px solid yellow;
-  color: yellow;
+  border: 3px solid #fcc200;
+  border-radius: 5px;
+  color: #fff;
+  background-color:rgba(42, 42, 42, 0.8)
 }
 
 .titleFilter {
   text-align: center;
-  color: white;
+    color: #fcc200;
   font-size: 25px;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'starjedi', sans-serif;
 }
 
 .baliseCheckBox {
   font-size: 20px;
+  margin: 10px 100px;
     }
+
+.wrapper-checkbox>div {
+  display: flex;
+  
+}
