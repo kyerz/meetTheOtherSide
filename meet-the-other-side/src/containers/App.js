@@ -133,14 +133,14 @@ class App extends Component {
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
           <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message}/>
         <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
        </div>
         )
       }
       return (
         <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message} />
         <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )
