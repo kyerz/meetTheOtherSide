@@ -36,8 +36,10 @@ class App extends Component {
     myCharacter:{} ,
     page : 1,
     profileSelected : null,
-    message : 0,
+    notif:0,
+    message : [],
     open : false
+
   }
   charactersLight = ()=>this.state.characters.filter(isLightSide)
   charactersDark =()=> this.state.characters.filter(isDarkSide)
@@ -48,9 +50,37 @@ class App extends Component {
    return characters[Math.floor(Math.random()*characters.length)]
   }
      
-  sendMessage = () => {
-    console.log("test");
-    return this.setState({message:1})
+  sendMessage = (characterSelect) => {
+    console.log("sendmessage",characterSelect.id);
+     this.setState({notif:1})
+    let message ='sendMessagreTest'
+    if (characterSelect.id === 4) {
+      message="Viens sur mes genoux ... et appelle moi papa"
+    }
+    else if (characterSelect.id === 20 ) {
+      message = "Ma force en toi tu sentiras"
+    }
+  else if (characterSelect.id === 13 ) {
+      message = "Heiiiiiiinnnnnnnnnnnggggggggggggggggggggggggggg"
+    }
+  else if (characterSelect.id === 14 ) {
+      message = "Han solo"
+    }
+ else if (characterSelect.species === "droid" ) {
+      message = "Je cherche quelqu'un pour lubrifier mes rouages"
+    }
+ /*else if (characterSelect.diedLocation ) {
+      message = `je t'attends à ${characterSelect.diedLocation}`
+    }
+ else if (characterSelect.diedLocation ) {
+      message = `je t'attends à ${characterSelect.diedLocation}`
+    }*/
+  else {message = " je t'attends"}
+  console.log(message)
+  let name = characterSelect.name
+  let msg = {name,message}
+  this.setState({ message: [ ...this.state.message, msg ]})
+  console.log("state.message", this.state.message)
 
   }
 
