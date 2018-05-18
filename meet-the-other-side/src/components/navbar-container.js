@@ -12,7 +12,6 @@ return ( <div className="msgContent"> {msgList} </div> )
 
 
 const NavBar = (props) => {
-  console.log("navBar", props)
   return (
     <div className='wrapper-navbar'>
       

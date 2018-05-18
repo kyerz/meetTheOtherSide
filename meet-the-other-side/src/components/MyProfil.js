@@ -1,6 +1,7 @@
 import React from 'react'
 
 const MyProfil = (props) => {
+    //console.log(action);
     return (
          <div className="character-wrapper ui grid" key={props.character.id}>
             <i className="arrow circle left icon" onClick={() => props.action()}></i>

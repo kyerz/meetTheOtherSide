@@ -100,6 +100,7 @@ class App extends Component {
     return this.changeMyCharacter(this.charactersDark())
   }
   selectProfile = profileSelected => this.setState({ profileSelected })
+  myProfile = (myCharacter) => this.setState({ myProfileSelected : 'test' })
 
 
   leFiltre = (state) => {
@@ -172,21 +173,21 @@ class App extends Component {
       if (this.state.profileSelected) {
         return (
           <div className="App">
-            <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+            <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
             <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage={this.sendMessage} />
           </div>
         )
       } else if (this.state.myProfileSelected) {
         return (
           <div className="App">
-            <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+            <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
             <MyProfil character={this.state.myCharacter} action={this.goBack} />
           </div>
         )
       }
       return (
         <div className="App">
-          <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+          <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
           <h2 className="titleFilter">Love Stars Filter</h2>
           <div className="loveFilter">
             <div className="wrapper-checkbox">
