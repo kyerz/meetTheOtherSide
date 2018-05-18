@@ -3,6 +3,7 @@ import './../style/characters.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import MyProfil from '../components/MyProfil.js'
+import LoverProfile from '../components/LoverProfile.js'
 
 const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
 
@@ -11,7 +12,8 @@ class App extends Component {
     characters: [],
     userSide: 'light',
     myCharacter:{} ,
-    page : 1
+    page : 1,
+    profilSelected : null
   }
 
   getAlternateSide = () => getAlternateSide(this.state.userSide)
@@ -32,6 +34,7 @@ class App extends Component {
     
    return this.changeMyCharacter()
   }
+  selectProfile = profileSelected => this.setState({profileSelected})
 
   constructor() {
     super()
@@ -54,10 +57,18 @@ class App extends Component {
       </div>
     )}
     else {
-      console.log('deux',this.state.myCharacter)
+
+      if(this.state.profileSelected){
+        const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
+        return (
+          <div className="App">
+        <LoverProfile action={this.selectProfile} {...selectProfile} />
+       </div>
+        )
+      }
       return (
         <div className="App">
-        <CreateChars  characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
+        <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )
     }
