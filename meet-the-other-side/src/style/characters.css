@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:300,400,700');
-html, body {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  background: url(../img/milky-way-BG.jpg)
+
+html,body {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background-image : url(../img/milky-way-BG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 html, body {
@@ -15,19 +19,20 @@ h1, h2, h3, h4, h5{
   margin : 0;
 }
 .imgContainer {
-  width: 20rem;
-  height: 30rem;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: top;
-  margin: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: 1rem;
-  border: 0.4rem inset #fdf253;
-  text-decoration: none;
-  transition: background-size 10s cubic-bezier(0, 0.76, 0, 1.15);
+    width: 20rem;
+    height: 30rem;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 1rem;
+    border: 0.4rem inset #fcc200;
+    box-shadow: -15px 15px 25px 0px #000;
+    text-decoration: none;
+    transition: background-size 10s cubic-bezier(0, 0.76, 0, 1.15); 
 }
 
 .charList {
@@ -37,7 +42,7 @@ h1, h2, h3, h4, h5{
 }
 
 .character-wrapper {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(75, 72, 72, 0.5);
   margin : 0;
   color: white;
   padding: 0.2rem;
@@ -70,4 +75,17 @@ h1, h2, h3, h4, h5{
 .character-name {
   font-weight: 400;
   font-size: 1.2rem;
+}
+
+.character-name, .character-born, .character-location {
+  color: #fff;
+}
+
+.styles_modal__gNwvD {
+  width: 500px;
+  height: 300px;
+  border: 1px solid #000;
+  -webkit-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
+  -moz-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
+  box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
 }

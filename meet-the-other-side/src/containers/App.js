@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import './../style/characters.css'
 import '../style/selection-chars.css'
+import '../style/loveFiltre.css'
+import '../style/navbar.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
 import MyProfil from '../components/MyProfil.js'
 import LoverProfile from '../components/LoverProfile.js'
 
+const critereMake = ['human', 'droid', 'male', 'female']
 
 const getAlternateSide = side => side === 'light' ? 'dark' : 'light'
 
@@ -33,10 +36,13 @@ class App extends Component {
     characters: [],
     userSide: 'light',
     myCharacter: {},
+    panier: [],
     page: 1,
     profileSelected: null,
     myProfileSelected: null,
-    message: 0
+    notif: 0,
+    message: [],
+    open: false
   }
   charactersLight = () => this.state.characters.filter(isLightSide)
   charactersDark = () => this.state.characters.filter(isDarkSide)
@@ -47,12 +53,40 @@ class App extends Component {
     return characters[Math.floor(Math.random() * characters.length)]
   }
 
-  sendMessage = () => {
-    console.log("test");
-    return this.setState({ message: 1 })
+  sendMessage = (characterSelect) => {
+    console.log("sendmessage", characterSelect.id);
+    this.setState({ notif: 1 })
+    let message = 'sendMessagreTest'
+    if (characterSelect.id === 4) {
+      message = "Viens sur mes genoux ... et appelle moi papa"
+    }
+    else if (characterSelect.id === 20) {
+      message = "Ma force en toi tu sentiras"
+    }
+    else if (characterSelect.id === 13) {
+      message = "Heiiiiiiinnnnnnnnnnnggggggggggggggggggggggggggg"
+    }
+    else if (characterSelect.id === 14) {
+      message = "Ca va peut-être pas sentir très bon... Mais au moins ca va te tenir chaud. "
+    }
+    else if (characterSelect.species === "droid") {
+      message = "Je cherche quelqu'un pour lubrifier mes rouages"
+    }
+    /*else if (characterSelect.diedLocation ) {
+         message = `je t'attends à ${characterSelect.diedLocation}`
+       }
+    else if (characterSelect.diedLocation ) {
+         message = `je t'attends à ${characterSelect.diedLocation}`
+       }*/
+    else { message = " je t'attends" }
+    console.log(message)
+    let name = characterSelect.name
+    let msg = { name, message }
+    this.setState({ message: [...this.state.message, msg] })
+    console.log("state.message", this.state.message)
 
   }
-
+  
   changeMyCharacter = (type) => this.setState({ myCharacter: this.getRandomCharacter(type) })
   handleClickLight = () => {
     this.setState({ page: 2 })
@@ -66,54 +100,105 @@ class App extends Component {
     return this.changeMyCharacter(this.charactersDark())
   }
   selectProfile = profileSelected => this.setState({ profileSelected })
-  myProfile = (myCharacter) => this.setState({ myProfileSelected : 'test' })
-  goBack = () => this.setState({ myProfileSelected : null })
-      constructor() {
-      super()
-      fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
-        .then(result => result.json())
 
-        .then(characters => {
-          this.setState({ characters })
-        })
-    }
 
-    render() {
+  leFiltre = (state) => {
+    const selectedCriteres = critereMake
+      .filter(critere => state[critere])
 
-      if (this.state.page === 1) {
+    const panier = state.characters.filter(char => selectedCriteres.includes(char.species) ||
+      selectedCriteres.includes(char.gender))
 
-        return (
-          <div className="App">
-            <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
-          </div>
-        )
-      }
-      else {
-        const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected)
-        if (this.state.profileSelected) {
-          return (
-            <div className="App">
-              <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
-              <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage={this.sendMessage} />
-            </div>
-          )
-        }else if(this.state.myProfileSelected){
-          return (
-            <div className="App">
-              <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
-              <MyProfil character={this.state.myCharacter} action={this.goBack}/>
-            </div>
-          )
-        }
-        return (
-          <div className="App">
-            <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
-            <CreateChars action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
-          </div>
-        )
-      }
-    }
+    return { panier }
   }
 
-  export default App
 
+  MakeCheck = () => {
+    const checkbox = critereMake.map(elt => {
+      return (
+        <div className="baliseCheckBox" key={elt}>
+          <input type="checkbox" name={elt}
+            onChange={e => {
+              this.setState({ [elt]: e.target.checked })
+              this.setState(this.leFiltre)
+            }} />
+          <label>
+            {elt}
+          </label>
+        </div>
+      )
+    })
+    return (
+      <div>
+        {checkbox}
+      </div>
+    )
+  }
+  selectProfile = profileSelected => this.setState({ profileSelected })
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
+  constructor() {
+    super()
+    fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
+      .then(result => result.json())
+
+      .then(characters => {
+        this.setState({ characters })
+        this.setState({ panier: characters })
+      })
+  }
+  selectProfile = profileSelected => this.setState({ profileSelected })
+  myProfile = (myCharacter) => this.setState({ myProfileSelected: 'test' })
+  goBack = () => this.setState({ myProfileSelected: null })
+  render() {
+
+    if (this.state.page === 1) {
+
+      return (
+        <div className="App">
+          <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
+        </div>
+      )
+    }
+    else {
+      const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected)
+      if (this.state.profileSelected) {
+        return (
+          <div className="App">
+            <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+            <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage={this.sendMessage} />
+          </div>
+        )
+      } else if (this.state.myProfileSelected) {
+        return (
+          <div className="App">
+            <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+            <MyProfil character={this.state.myCharacter} action={this.goBack} />
+          </div>
+        )
+      }
+      return (
+        <div className="App">
+          <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message={this.state.message} />
+          <h2 className="titleFilter">Love Stars Filter</h2>
+          <div className="loveFilter">
+            <div className="wrapper-checkbox">
+              {this.MakeCheck()}
+            </div>
+          </div>
+          <CreateChars action={this.selectProfile} characters={this.state.panier} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
+        </div>
+      )
+    }
+
+  }
+}
+
+export default App
