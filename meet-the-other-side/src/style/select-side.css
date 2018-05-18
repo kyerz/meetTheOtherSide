@@ -57,9 +57,7 @@
 .dark-side:hover{
     background : linear-gradient(to top, rgba(169, 34, 28, 1), #000000);
 }
-.charList {
-    display: none;
-}
+
 
 .home-title {
     font-size: 45px;

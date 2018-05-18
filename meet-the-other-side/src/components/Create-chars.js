@@ -1,10 +1,10 @@
 import React from 'react'
+import '../style/characters.css'
 
-
-const Pic = ({ id, image, name, born, homeworld, diedLocation }) => {
+const Pic = ({id,image,name,born,homeworld,action}) => {
 
   return (
-    <div className="imgContainer" key={id} style = {{backgroundImage: `url(${image})`}}>
+    <div  className="imgContainer" onClick={() => action(id)} key={id} style = {{backgroundImage: `url(${image})`}}>
         <div className= "character-infos"> 
             <div className = "character-name"> Name : {name} </div>
             <div className = "character-born"> Born : {born} </div>
@@ -29,11 +29,14 @@ const sideFilters = {
   dark: isDarkSide
 }
 
-const CreateChars = ({ characters, userSide }) =>
+const CreateChars = ({ characters, userSide, action }) => 
   <div className="charList">
     {characters
       .filter(sideFilters[userSide])
-      .map(Pic)}
+      .map(c => Pic({ action, ...c }))}
   </div>
+
+ 
+
 
 export default CreateChars
