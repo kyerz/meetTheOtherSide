@@ -25,6 +25,7 @@ const isLightSide = (characters) =>
    light: isLightSide,
    dark: isDarkSide
  }
+  
 
 class App extends Component {
   state = {
@@ -34,38 +35,28 @@ class App extends Component {
     page : 1,
     profilSelected : null
   }
-
+  charactersLight = ()=>this.state.characters.filter(isLightSide)
+  charactersDark =()=> this.state.characters.filter(isDarkSide)
   getAlternateSide = () => getAlternateSide(this.state.userSide)
   changeSide = () => this.setState({ userSide: this.getAlternateSide() })
   
-   getRandomCharacter = (characters, userSide) => {
-    console.log("getsomecharandom", characters)
-    console.log("user side", userSide )
-    const charactersLight = characters.filter(isLightSide)
-    const charactersDark = characters.filter(isDarkSide)
-    console.log("getDark", charactersDark)
-    console.log("getLight", charactersLight)
-   if (userSide === 'dark') {
-     console.log("sideL",userSide )
-    return charactersLight[Math.floor(Math.random()*charactersLight.length)]
-    
-   }
-   console.log("sideD",userSide )
-   return charactersDark[Math.floor(Math.random()*charactersDark.length)]
-
- }
+   getRandomCharacter = (characters) => {
+   return characters[Math.floor(Math.random()*characters.length)]
+  }
      
     
   
-  changeMyCharacter = (userSide) => this.setState({ myCharacter: this.getRandomCharacter(this.state.characters, userSide) })
+  changeMyCharacter = (type) => this.setState({ myCharacter: this.getRandomCharacter(type) })
   handleClickLight = () =>{
     this.setState({page :2})
     this.setState({userSide:'dark'})
-   return this.changeMyCharacter(this.state.userSide)
+    
+   return this.changeMyCharacter(this.charactersLight())
   }
   handleClickDark = () =>{
     this.setState({page :2})
-   return this.changeMyCharacter(this.state.userSide)
+    
+   return this.changeMyCharacter(this.charactersDark())
   }
   selectProfile = profileSelected => this.setState({profileSelected})
 
@@ -90,7 +81,7 @@ class App extends Component {
       </div>
     )}
     else {
-      console.log("character sleted side", this.state.myCharacter.name,this.state.myCharacter.id)
+      
       if(this.state.profileSelected){
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
