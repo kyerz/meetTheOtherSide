@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import './../style/characters.css'
 import '../style/selection-chars.css'
+import '../style/loveFiltre.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
 import MyProfil from '../components/MyProfil.js'
 import LoverProfile from '../components/LoverProfile.js'
 
-const critereMake = ['human', 'droid', 'other', 'wookie']
+const critereMake = ['human', 'droid', 'male' , 'female' ]
 
 const getAlternateSide = side => side === 'light' ? 'dark' : 'light'
 
@@ -35,8 +36,11 @@ class App extends Component {
     userSide: 'light',
     myCharacter: {},
     page: 1,
-    profileSelected: null
-  }
+    profileSelected: null,
+    panier: []
+    }
+   
+    
   charactersLight = () => this.state.characters.filter(isLightSide)
   charactersDark = () => this.state.characters.filter(isDarkSide)
   getAlternateSide = () => getAlternateSide(this.state.userSide)
@@ -62,17 +66,27 @@ class App extends Component {
   }
   selectProfile = profileSelected => this.setState({ profileSelected })
 
-  
-  
+
+  leFiltre = (state) => {
+    const selectedCriteres = critereMake
+      .filter(critere => state[critere])
+
+    const panier = state.characters.filter(char => selectedCriteres.includes(char.species) || 
+                    selectedCriteres.includes(char.gender))
+
+    return { panier }
+  }
+
+
   MakeCheck = () => {
-    console.log('setState: ', this.state)
     const checkbox = critereMake.map(elt => {
       return (
-        <div key={elt}>
-          <input type="checkbox" onChange={e => {
-            this.setState({ [elt]: e.target.checked })
-            console.log('e.target.checked: ', e.target)
-          }} />
+        <div className="baliseCheckBox" key={elt}>
+          <input type="checkbox" name={elt}
+            onChange={e => {
+              this.setState({ [elt]: e.target.checked })
+              this.setState(this.leFiltre)
+            }} />
           <label>
             {elt}
           </label>
@@ -85,23 +99,6 @@ class App extends Component {
       </div>
     )
   }
-  leFiltre = () => {
-    let panier = []
-    let i = 0
-    while (i < critereMake.length) {
-      if (this.state[critereMake[i]]) {
-        const enSolde = this.state.characters.filter(char => (char.species === critereMake[i]))
-        panier = panier.concat(enSolde)
-        console.log('panier: ', panier);
-      }
-      i++
-    }
-    return (
-      <div>
-        IMG A INJECTER
-      </div>
-    )
-  }
 
   constructor() {
     super()
@@ -110,7 +107,7 @@ class App extends Component {
 
       .then(characters => {
         this.setState({ characters })
-        console.log(characters)
+        this.setState({panier : characters})
       })
   }
 
@@ -119,7 +116,6 @@ class App extends Component {
 
       return (
         <div className="App">
-
           <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
         </div>
       )
@@ -138,9 +134,12 @@ class App extends Component {
       return (
         <div className="App">
           <NavBar myCharacter={this.state.myCharacter} />
+          <h2 className="titleFilter">Love Stars Filter</h2>
+          <div className="loveFilter">
           {this.MakeCheck()}
-          {this.leFiltre()}
-          <CreateChars action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
+          </div>
+        {console.log(this.state)}
+          <CreateChars action={this.selectProfile} characters={this.state.panier} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
         </div>
       )
     }
@@ -148,5 +147,3 @@ class App extends Component {
 }
 
 export default App
-
-
