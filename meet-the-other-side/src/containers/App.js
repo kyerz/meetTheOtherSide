@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './../style/characters.css'
 import '../style/selection-chars.css'
 import '../style/loveFiltre.css'
+import '../style/navbar.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
@@ -34,23 +35,56 @@ class App extends Component {
   state = {
     characters: [],
     userSide: 'light',
-    myCharacter: {},
-    page: 1,
-    profileSelected: null,
-    panier: []
-    }
-   
-    
-  charactersLight = () => this.state.characters.filter(isLightSide)
-  charactersDark = () => this.state.characters.filter(isDarkSide)
+  myCharacter:{} ,
+  panier: [],
+  page : 1,
+  profileSelected : null,
+    notif:0,
+    message : [],
+    open : false
+
+  }
+  charactersLight = ()=>this.state.characters.filter(isLightSide)
+  charactersDark =()=> this.state.characters.filter(isDarkSide)
   getAlternateSide = () => getAlternateSide(this.state.userSide)
   changeSide = () => this.setState({ userSide: this.getAlternateSide() })
 
   getRandomCharacter = (characters) => {
     return characters[Math.floor(Math.random() * characters.length)]
   }
+  sendMessage = (characterSelect) => {
+    console.log("sendmessage",characterSelect.id);
+     this.setState({notif:1})
+    let message ='sendMessagreTest'
+    if (characterSelect.id === 4) {
+      message="Viens sur mes genoux ... et appelle moi papa"
+    }
+    else if (characterSelect.id === 20 ) {
+      message = "Ma force en toi tu sentiras"
+    }
+  else if (characterSelect.id === 13 ) {
+      message = "Heiiiiiiinnnnnnnnnnnggggggggggggggggggggggggggg"
+    }
+  else if (characterSelect.id === 14 ) {
+      message = "Ca va peut-être pas sentir très bon... Mais au moins ca va te tenir chaud. "
+    }
+ else if (characterSelect.species === "droid" ) {
+      message = "Je cherche quelqu'un pour lubrifier mes rouages"
+    }
+ /*else if (characterSelect.diedLocation ) {
+      message = `je t'attends à ${characterSelect.diedLocation}`
+    }
+ else if (characterSelect.diedLocation ) {
+      message = `je t'attends à ${characterSelect.diedLocation}`
+    }*/
+  else {message = " je t'attends"}
+  console.log(message)
+  let name = characterSelect.name
+  let msg = {name,message}
+  this.setState({ message: [ ...this.state.message, msg ]})
+  console.log("state.message", this.state.message)
 
-
+  }
 
   changeMyCharacter = (type) => this.setState({ myCharacter: this.getRandomCharacter(type) })
   handleClickLight = () => {
@@ -99,6 +133,15 @@ class App extends Component {
       </div>
     )
   }
+  selectProfile = profileSelected => this.setState({profileSelected})
+  
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   constructor() {
     super()
@@ -126,19 +169,18 @@ class App extends Component {
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected)
         return (
           <div className="App">
-            <NavBar myCharacter={this.state.myCharacter} />
-            <LoverProfile action={this.selectProfile} {...selectProfile} />
-          </div>
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message}/>
+        <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
+       </div>
         )
       }
       return (
         <div className="App">
-          <NavBar myCharacter={this.state.myCharacter} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message} />
           <h2 className="titleFilter">Love Stars Filter</h2>
           <div className="loveFilter">
           {this.MakeCheck()}
           </div>
-        {console.log(this.state)}
           <CreateChars action={this.selectProfile} characters={this.state.panier} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
         </div>
       )
