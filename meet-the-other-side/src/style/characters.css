@@ -82,6 +82,7 @@ html, body {
   width: 500px;
   height: 300px;
   border: 1px solid #000;
+  border-radius: 5px;
   -webkit-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
   -moz-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
   box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
