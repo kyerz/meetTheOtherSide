@@ -24,6 +24,29 @@
 .light-side{
     background : linear-gradient(to top, rgba(0, 80, 161, 0.2), #000000);
 }
+.light-side-children, .dark-side-children{
+    font-family: 'starjedi';
+    font-size: 1.5rem;
+    color: #000;
+}
+.light-side-children{
+    position: absolute;
+    left: 60px;
+    top: 140px;
+}
+.dark-side-children{
+    position: absolute;
+    right: 60px;
+    top: 140px;
+}
+.light-side:hover .light-side-children{
+    color: #fcc200;
+    transition: 0.5s ease-in;
+}
+.dark-side:hover .dark-side-children{
+    color: #fcc200;
+    transition: 0.5s ease-in;
+}
 .dark-side{
     background : linear-gradient(to top, rgba(169, 34, 28, 0.2), #000000);
 }
