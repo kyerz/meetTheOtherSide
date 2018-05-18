@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './../style/characters.css'
 import '../style/selection-chars.css'
+import '../style/navbar.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
