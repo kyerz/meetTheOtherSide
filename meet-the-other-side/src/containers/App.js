@@ -34,7 +34,8 @@ class App extends Component {
     userSide: 'light',
     myCharacter:{} ,
     page : 1,
-    profileSelected : null
+    profileSelected : null,
+    message : 0
   }
   charactersLight = ()=>this.state.characters.filter(isLightSide)
   charactersDark =()=> this.state.characters.filter(isDarkSide)
@@ -45,8 +46,12 @@ class App extends Component {
    return characters[Math.floor(Math.random()*characters.length)]
   }
      
-    
-  
+  sendMessage = () => {
+    console.log("test");
+    return this.setState({message:1})
+
+  }
+
   changeMyCharacter = (type) => this.setState({ myCharacter: this.getRandomCharacter(type) })
   handleClickLight = () =>{
     this.setState({page :2})
@@ -74,6 +79,7 @@ class App extends Component {
   }
 
   render() {
+
     if(this.state.page===1){
       
     return (
@@ -89,7 +95,7 @@ class App extends Component {
         return (
           <div className="App">
         <NavBar myCharacter={this.state.myCharacter} />
-        <LoverProfile action={this.selectProfile} {...selectProfile} />
+        <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
        </div>
         )
       }

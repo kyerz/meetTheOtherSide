@@ -3,7 +3,6 @@ import Logo from './logo'
 import '../style/navbar.css'
 
 const NavBar = (props) => {
-  console.log('toto')
   return (
     <div className='wrapper-navbar'>
       <Logo />
