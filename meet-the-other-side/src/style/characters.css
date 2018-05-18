@@ -39,7 +39,7 @@ html, body {
 }
 
 .character-wrapper {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(75, 72, 72, 0.5);
   margin : 0;
   color: white;
   padding: 0.2rem;
@@ -74,16 +74,15 @@ html, body {
   font-size: 1.2rem;
 }
 
-.character-location {
-  margin-bottom: 10px;
-}
-
 .character-name, .character-born, .character-location {
   color: #fff;
-  margin-left: 10px;
 }
 
 .styles_modal__gNwvD {
   width: 500px;
   height: 300px;
+  border: 1px solid #000;
+  -webkit-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
+  -moz-box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
+  box-shadow: 67px -63px 19px -23px rgba(0,0,0,1);
 }
