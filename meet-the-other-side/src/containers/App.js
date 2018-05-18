@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import './../style/characters.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
+import NavBar from '../components/navbar-container.js'
 import MyProfil from '../components/MyProfil.js'
 import LoverProfile from '../components/LoverProfile.js'
+
 
 const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
 
@@ -52,8 +54,8 @@ class App extends Component {
       
     return (
       <div className="App">
+
         <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
-        
       </div>
     )}
     else {
@@ -68,6 +70,7 @@ class App extends Component {
       }
       return (
         <div className="App">
+        <NavBar />
         <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )
