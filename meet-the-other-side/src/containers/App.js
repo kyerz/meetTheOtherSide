@@ -64,7 +64,7 @@ class App extends Component {
       message = "Heiiiiiiinnnnnnnnnnnggggggggggggggggggggggggggg"
     }
   else if (characterSelect.id === 14 ) {
-      message = "Han solo"
+      message = "Ca va peut-être pas sentir très bon... Mais au moins ca va te tenir chaud. "
     }
  else if (characterSelect.species === "droid" ) {
       message = "Je cherche quelqu'un pour lubrifier mes rouages"
@@ -133,14 +133,14 @@ class App extends Component {
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
           <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message}/>
         <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
        </div>
         )
       }
       return (
         <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} message = {this.state.message} />
         <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )
