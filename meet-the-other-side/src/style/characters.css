@@ -3,7 +3,10 @@
 html,body {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    background : url(../img/milky-way-BG.jpg)
+    background-image : url(../img/milky-way-BG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 html, body {
@@ -21,7 +24,8 @@ html, body {
     flex-direction: column;
     justify-content: flex-end;
     font-size: 1rem;
-    border: 0.4rem inset #fdf253;
+    border: 0.4rem inset #fcc200;
+    box-shadow: -15px 15px 25px 0px #000;
     text-decoration: none;
     transition: background-size 10s cubic-bezier(0, 0.76, 0, 1.15); 
 }

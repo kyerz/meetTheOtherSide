@@ -27,4 +27,11 @@
   height: 10em;
   background-size: cover;
 }
-
+.logout{
+  padding-bottom: 3px;
+  border-bottom: 3px solid #fff;
+}
+.logout:hover{
+  border-color: #000;
+  transition: 0.3s ease-out;
+}
