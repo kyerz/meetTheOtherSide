@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './../style/characters.css'
 import '../style/selection-chars.css'
+import '../style/navbar.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
@@ -36,7 +37,9 @@ class App extends Component {
     page : 1,
     profileSelected : null,
     notif:0,
-    message : []
+    message : [],
+    open : false
+
   }
   charactersLight = ()=>this.state.characters.filter(isLightSide)
   charactersDark =()=> this.state.characters.filter(isDarkSide)
@@ -95,6 +98,13 @@ class App extends Component {
   }
   selectProfile = profileSelected => this.setState({profileSelected})
   
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   constructor() {
     super()
@@ -123,14 +133,14 @@ class App extends Component {
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
           <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
         <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
        </div>
         )
       }
       return (
         <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} />
+        <NavBar myCharacter={this.state.myCharacter} open={this.state.open} onOpenModal={this.onOpenModal} onCloseModal={this.onCloseModal} />
         <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
        </div>
       )

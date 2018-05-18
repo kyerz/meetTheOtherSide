@@ -28,4 +28,10 @@
   height: 10em;
   background-size: cover;
 }
-
+.logout{
+  padding-bottom: 3px;
+}
+.logout:hover{
+  border-bottom: 2px solid #fff;
+  transition: 0.3s ease-out;
+}
