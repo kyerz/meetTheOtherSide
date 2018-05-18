@@ -7,3 +7,7 @@
   border : 0.4rem inset rgba(0,0,0,0.5);
   cursor : pointer;
 }
+.imgContainer .character-infos{
+  background: rgba(0,0,0,0.5);
+  color : #fff;
+}

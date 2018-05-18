@@ -8,6 +8,9 @@ html, body {
 html, body {
   margin: 1rem;
 }
+h1, h2, h3, h4, h5{
+  font-family : 'Oswald'
+}
 .ui.grid{
   margin : 0;
 }
