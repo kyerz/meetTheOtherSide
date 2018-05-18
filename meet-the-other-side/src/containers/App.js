@@ -118,12 +118,13 @@ class App extends Component {
     const checkbox = critereMake.map(elt => {
       return (
         <div className="baliseCheckBox" key={elt}>
+        <label>
           <input type="checkbox" name={elt}
             onChange={e => {
               this.setState({ [elt]: e.target.checked })
               this.setState(this.leFiltre)
             }} />
-          <label>
+
             {elt}
           </label>
         </div>
