@@ -2,15 +2,12 @@
   display: flex;
   
 }
-
 .logo-container h1 {
   margin-left: 20px;
 }
-
 .logo {
   height: 70px; 
 }
-
 .wrapper-navbar{
   display: flex;
   justify-content: space-evenly;
@@ -19,16 +16,15 @@
   padding: 10px 0;
   margin-bottom: 30px;
 }
-
 .wrapper-navbar a, i {
   cursor: pointer;
   color: #000;
   font-size: 1.2rem;
 }
-
 .myprofile {
   border-radius: 50%;
   width: 10em;
   height: 10em;
   background-size: cover;
 }
+

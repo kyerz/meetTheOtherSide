@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './../style/characters.css'
+import '../style/selection-chars.css'
 import CreateChars from '../components/Create-chars.js'
 import SelectSide from '../components/Select-side.js'
 import NavBar from '../components/navbar-container.js'
@@ -64,6 +65,7 @@ class App extends Component {
         const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
           <div className="App">
+        <NavBar myCharacter={this.state.myCharacter} />
         <LoverProfile action={this.selectProfile} {...selectProfile} />
        </div>
         )

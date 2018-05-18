@@ -10,7 +10,7 @@ const NavBar = (props) => {
       <div  className="myprofile" style = {{backgroundImage: `url(${props.myCharacter.image})`}}></div>
       <div>{props.myCharacter.name}</div>
       <i className="mail outline big icon"></i>
-      <a>Logout</a>
+      <a className='logout'>Logout</a>
     </div>
   )
 }
