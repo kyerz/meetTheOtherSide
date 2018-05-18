@@ -8,106 +8,112 @@ import MyProfil from '../components/MyProfil.js'
 import LoverProfile from '../components/LoverProfile.js'
 
 
-const getAlternateSide = side => side === 'light' ?  'dark' : 'light'
+const getAlternateSide = side => side === 'light' ? 'dark' : 'light'
 
 const isLightSide = (characters) =>
-   (characters.affiliations.includes("Galactic Republic")
-     || characters.affiliations.includes("Resistance")
-     || characters.affiliations.includes("Jedi Order")
-     || characters.affiliations.includes("Alliance to Restore the Republic")
-     || characters.affiliations.includes("Lars family")
-     || characters.affiliations.length === 0)
-   && !characters.affiliations.includes("Hutt Clan")
-   && !characters.affiliations.includes("Sith")
-  "Hutt Clan" 
- const isDarkSide = character => !isLightSide(character)
- 
- const sideFilters = {
-   light: isLightSide,
-   dark: isDarkSide
- }
-  
+  (characters.affiliations.includes("Galactic Republic")
+    || characters.affiliations.includes("Resistance")
+    || characters.affiliations.includes("Jedi Order")
+    || characters.affiliations.includes("Alliance to Restore the Republic")
+    || characters.affiliations.includes("Lars family")
+    || characters.affiliations.length === 0)
+  && !characters.affiliations.includes("Hutt Clan")
+  && !characters.affiliations.includes("Sith")
+"Hutt Clan"
+const isDarkSide = character => !isLightSide(character)
+
+const sideFilters = {
+  light: isLightSide,
+  dark: isDarkSide
+}
+
 
 class App extends Component {
   state = {
     characters: [],
     userSide: 'light',
-    myCharacter:{} ,
-    page : 1,
-    profileSelected : null,
-    message : 0
+    myCharacter: {},
+    page: 1,
+    profileSelected: null,
+    myProfileSelected: null,
+    message: 0
   }
-  charactersLight = ()=>this.state.characters.filter(isLightSide)
-  charactersDark =()=> this.state.characters.filter(isDarkSide)
+  charactersLight = () => this.state.characters.filter(isLightSide)
+  charactersDark = () => this.state.characters.filter(isDarkSide)
   getAlternateSide = () => getAlternateSide(this.state.userSide)
   changeSide = () => this.setState({ userSide: this.getAlternateSide() })
-  
-   getRandomCharacter = (characters) => {
-   return characters[Math.floor(Math.random()*characters.length)]
+
+  getRandomCharacter = (characters) => {
+    return characters[Math.floor(Math.random() * characters.length)]
   }
-     
+
   sendMessage = () => {
     console.log("test");
-    return this.setState({message:1})
+    return this.setState({ message: 1 })
 
   }
 
   changeMyCharacter = (type) => this.setState({ myCharacter: this.getRandomCharacter(type) })
-  handleClickLight = () =>{
-    this.setState({page :2})
-    this.setState({userSide:'dark'})
-    
-   return this.changeMyCharacter(this.charactersLight())
+  handleClickLight = () => {
+    this.setState({ page: 2 })
+    this.setState({ userSide: 'dark' })
+
+    return this.changeMyCharacter(this.charactersLight())
   }
-  handleClickDark = () =>{
-    this.setState({page :2})
-    
-   return this.changeMyCharacter(this.charactersDark())
+  handleClickDark = () => {
+    this.setState({ page: 2 })
+
+    return this.changeMyCharacter(this.charactersDark())
   }
-  selectProfile = profileSelected => this.setState({profileSelected})
-  
+  selectProfile = profileSelected => this.setState({ profileSelected })
+  myProfile = (myCharacter) => this.setState({ myProfileSelected : 'test' })
+  goBack = () => this.setState({ myProfileSelected : null })
+      constructor() {
+      super()
+      fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
+        .then(result => result.json())
 
-  constructor() {
-    super()
-    fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
-      .then(result => result.json())
-      
-      .then(characters =>{
-        this.setState({ characters })
-       console.log(characters)
-      })
-  }
+        .then(characters => {
+          this.setState({ characters })
+        })
+    }
 
-  render() {
+    render() {
 
-    if(this.state.page===1){
-      
-    return (
-      <div className="App">
+      if (this.state.page === 1) {
 
-        <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
-      </div>
-    )}
-    else {
-      
-      if(this.state.profileSelected){
-        const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected )
         return (
           <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} />
-        <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage = {this.sendMessage} />
-       </div>
+            <SelectSide characters={this.state.characters} userSide={this.state.userSide} actionLight={this.handleClickLight} actionDark={this.handleClickDark} text="Change Side" />
+          </div>
         )
       }
-      return (
-        <div className="App">
-        <NavBar myCharacter={this.state.myCharacter} />
-        <CreateChars  action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide}   myCharacter={this.state.myCharacter} />
-       </div>
-      )
+      else {
+        const selectProfile = this.state.characters.find(c => c.id === this.state.profileSelected)
+        if (this.state.profileSelected) {
+          return (
+            <div className="App">
+              <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
+              <LoverProfile action={this.selectProfile} {...selectProfile} sendMessage={this.sendMessage} />
+            </div>
+          )
+        }else if(this.state.myProfileSelected){
+          return (
+            <div className="App">
+              <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
+              <MyProfil character={this.state.myCharacter} action={this.goBack}/>
+            </div>
+          )
+        }
+        return (
+          <div className="App">
+            <NavBar myCharacter={this.state.myCharacter} action={this.myProfile} />
+            <CreateChars action={this.selectProfile} characters={this.state.characters} userSide={this.state.userSide} myCharacter={this.state.myCharacter} />
+          </div>
+        )
+      }
     }
   }
-}
 
-export default App
+  export default App
 
